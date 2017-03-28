@@ -1,0 +1,6 @@
+version: '2'
+services:
+  cast:
+    build: ./cast
+    ports:
+      - "8000:80"
