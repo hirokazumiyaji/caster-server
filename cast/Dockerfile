@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 RUN apt-get update -y && \
     apt-get install -y make clang vim ffmpeg wget libpcre3 libpcre3-dev openssl libssl-dev && \
-    mkdir -p /var/nginx/modules /var/log/nginx/hls /var/lib/nginx/body /var/lib/nginx/proxy /var/lib/nginx/fastcgi && \
+    mkdir -p /var/nginx/modules /var/log/nginx/broadcasts /var/lib/nginx/body /var/lib/nginx/proxy /var/lib/nginx/fastcgi && \
     cd /tmp && wget https://github.com/cubicdaiya/nginx-build/releases/download/v0.9.15/nginx-build-linux-amd64-0.9.15.tar.gz && \
     cd /tmp && tar xzf nginx-build-linux-amd64-0.9.15.tar.gz && \
     mv /tmp/nginx-build /usr/local/bin && \
@@ -28,6 +28,8 @@ RUN apt-get update -y && \
                 --add-module=/var/nginx/modules/nginx-rtmp-module-1.1.11 \
                 --with-http_ssl_module && \
     cd /tmp/work/nginx/1.11.11/nginx-1.11.11 && make install
+
+ADD nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80 1935
 
